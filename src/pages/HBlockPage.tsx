@@ -48,11 +48,21 @@ function SceneContent({ onReady }: { onReady: () => void }) {
   return (
     <>
       <ambientLight intensity={2.5} />
-      <directionalLight position={[5, 5, 5]} intensity={0.5} />
-      <directionalLight position={[0, -5, 5]} intensity={0.5} />
-      <directionalLight position={[0, -1, 5]} intensity={0.1} />
+      {/* <directionalLight position={[5, 5, 5]} intensity={0.5} /> */}
+      {/* <directionalLight position={[0, 1, 1]} intensity={1.0} color={'yellow'} />
+      <directionalLight position={[0, -1, 3]} intensity={1.0} color={'yellow'} />
+
+      <directionalLight position={[0, 1, -3]} intensity={1.0} color={'yellow'} />
+      <directionalLight position={[0, -1, -3]} intensity={1.0} color={'yellow'} />
+
+      <directionalLight position={[-2, 0, 3]} intensity={1.0} color={'yellow'} />
+      <directionalLight position={[2, 0, 3]} intensity={1.0} color={'yellow'} />
+
+      <directionalLight position={[-2, 0, -3]} intensity={1.0} color={'yellow'} />
+      <directionalLight position={[2, 0, -3]} intensity={1.0} color={'yellow'} /> */}
+
       <HBlocksGroup rows={7} tilesPerRow={17} verticalSpacing={0.375} horizontalOffset={0.38} />
-      <Environment preset="city" />
+      <Environment preset="city" environmentIntensity={2.5} />
     </>
   );
 }
