@@ -48,7 +48,7 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props
       holdTimeRef.current += delta;
 
       // After 2 seconds, move back
-      if (holdTimeRef.current >= 2) {
+      if (holdTimeRef.current >= 0.5) {
         targetZPositionRef.current = 0;
         isHoldingRef.current = false;
       }
