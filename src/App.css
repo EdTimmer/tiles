@@ -85,3 +85,12 @@ button:hover {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.hblocks-container {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/paint-01.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

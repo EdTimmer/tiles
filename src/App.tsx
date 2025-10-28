@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css'
 import Navigation from './components/Navigation';
 import HexTilePage from './pages/HexTilePage';
-import WallAPage from './pages/WallAPage';
+// import WallAPage from './pages/WallAPage';
 import WallBPage from './pages/WallBPage';
 import WallCPage from './pages/WallCPage';
+import HBlockPage from './pages/HBlockPage';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/hex-tiles" replace />} />
           <Route path="/hex-tiles" element={<HexTilePage />} />
-          <Route path="/wall-a" element={<WallAPage />} />
+          <Route path="/h-blocks" element={<HBlockPage />} />
           <Route path="/wall-b" element={<WallBPage />} />
           <Route path="/wall-c" element={<WallCPage />} />
         </Routes>

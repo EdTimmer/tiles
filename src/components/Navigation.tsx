@@ -18,13 +18,13 @@ const Navigation = () => {
       </Link>
       
       <Link 
-        to="/wall-a" 
+        to="/h-blocks" 
         className="button" 
         style={{ 
-          border: isActive('/wall-a') ? '1px solid white' : '1px solid transparent',
+          border: isActive('/h-blocks') ? '1px solid white' : '1px solid transparent',
         }}
       >
-        Wall A
+        H Blocks
       </Link>
       
       <Link 
