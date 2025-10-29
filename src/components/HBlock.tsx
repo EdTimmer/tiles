@@ -13,7 +13,7 @@ interface Props {
 
 const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/h-block_4.glb'); 
+  const { nodes, materials } = useGLTF('/assets/models/h-block_7.glb'); 
   const currentZPositionRef = useRef(0);
   const targetZPositionRef = useRef(0);
   const holdTimeRef = useRef(0);
