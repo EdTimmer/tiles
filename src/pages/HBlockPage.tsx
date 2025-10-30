@@ -63,6 +63,7 @@ function SceneContent({ onReady }: { onReady: () => void }) {
 
       <HBlocksGroup rows={7} tilesPerRow={17} verticalSpacing={0.375} horizontalOffset={0.38} />
       <Environment preset="city" environmentIntensity={2.5} />
+      {/* <OrbitControls enableZoom={true} enablePan={true} /> */}
     </>
   );
 }

@@ -6,6 +6,7 @@ import HexTilePage from './pages/HexTilePage';
 import WallBPage from './pages/WallBPage';
 import WallCPage from './pages/WallCPage';
 import HBlockPage from './pages/HBlockPage';
+import ValveTilePage from './pages/ValveTilePage';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route path="/" element={<Navigate to="/hex-tiles" replace />} />
           <Route path="/hex-tiles" element={<HexTilePage />} />
           <Route path="/h-blocks" element={<HBlockPage />} />
-          <Route path="/wall-b" element={<WallBPage />} />
+          <Route path="/wall-b" element={<ValveTilePage />} />
           <Route path="/wall-c" element={<WallCPage />} />
         </Routes>
       </div>

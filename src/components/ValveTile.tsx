@@ -11,34 +11,31 @@ interface Props {
   rotation?: [number, number, number];
 }
 
-const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
+const HexTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/h-block_8.glb'); 
-  const currentZPositionRef = useRef(0);
-  const targetZPositionRef = useRef(0);
+  const { nodes, materials } = useGLTF('/assets/models/valve.glb'); 
+  const currentRotationRef = useRef(0);
+  const targetRotationRef = useRef(0);
   const holdTimeRef = useRef(0);
   const isHoldingRef = useRef(false);
 
-  const handlePointerEnter = (event: any) => {
-    // Prevent event from bubbling and only trigger on the frontmost mesh
-    event.stopPropagation();
-    
-    // Start move animation - move -1.0 on z-axis
-    targetZPositionRef.current = -1.0;
+  const handlePointerEnter = () => {
+    // Start flip animation
+    targetRotationRef.current = Math.PI / 2;
     holdTimeRef.current = 0;
     isHoldingRef.current = false;
   };
 
   
 
-  // Continuous z-axis movement using useFrame
+  // Continuous rotation using useFrame
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-    
-    const isAtTarget = Math.abs(currentZPositionRef.current - (-1.0)) < 0.01;
-    
-    // If we've reached target position, start holding timer
-    if (isAtTarget && !isHoldingRef.current) {
+
+    const isAtFlipped = Math.abs(currentRotationRef.current - Math.PI / 2) < 0.01;
+
+    // If we've reached flipped position, start holding timer
+    if (isAtFlipped && !isHoldingRef.current) {
       isHoldingRef.current = true;
       holdTimeRef.current = 0;
     }
@@ -47,30 +44,30 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props
     if (isHoldingRef.current) {
       holdTimeRef.current += delta;
 
-      // After 2 seconds, move back
-      if (holdTimeRef.current >= 0.5) {
-        targetZPositionRef.current = 0;
+      // After 2 seconds, rotate back
+      if (holdTimeRef.current >= 20) {
+        targetRotationRef.current = 0;
         isHoldingRef.current = false;
       }
     }
     
     // Incorporate delta into the interpolation factor for frame rate independence
-    const speed = 3; // Adjust this to control the smoothness/speed
+    const speed = 10; // Adjust this to control the smoothness/speed
     const lerpFactor = 1 - Math.exp(-speed * delta);
     
-    // Interpolate the current z position towards the target z position
-    currentZPositionRef.current = MathUtils.lerp(
-      currentZPositionRef.current,
-      targetZPositionRef.current,
+    // Interpolate the current rotation towards the target rotation
+    currentRotationRef.current = MathUtils.lerp(
+      currentRotationRef.current,
+      targetRotationRef.current,
       lerpFactor
     );
     
-    groupRef.current.position.z = position[2] + currentZPositionRef.current;
+    groupRef.current.rotation.y = currentRotationRef.current;
     
     // Snap to target if very close
-    if (Math.abs(currentZPositionRef.current - targetZPositionRef.current) < 0.001) {
-      currentZPositionRef.current = targetZPositionRef.current;
-      groupRef.current.position.z = position[2] + targetZPositionRef.current;
+    if (Math.abs(currentRotationRef.current - targetRotationRef.current) < 0.001) {
+      currentRotationRef.current = targetRotationRef.current;
+      groupRef.current.rotation.y = targetRotationRef.current;
     }
   });
 
@@ -104,4 +101,4 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props
 // Preload the GLTF model
 useGLTF.preload('/assets/models/hex_tile_4.glb');
 
-export default HBlock;
+export default HexTile;

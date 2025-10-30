@@ -1,7 +1,7 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, Html, useProgress } from '@react-three/drei';
-import TilesGroup from './TilesGroup';
+import ValvesGroup from '../components/ValvesGroup';
 
 function Loader({ onLoaded }: { onLoaded: () => void }) {
   const { active, progress } = useProgress();
@@ -48,13 +48,13 @@ function SceneContent({ onReady }: { onReady: () => void }) {
     <>
       <ambientLight intensity={2.5} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
-      <TilesGroup rows={9} tilesPerRow={15} verticalSpacing={0.565} horizontalOffset={0.325} />
+      <ValvesGroup rows={9} tilesPerRow={15} verticalSpacing={0.73} horizontalOffset={0.325} />
       <Environment preset="city" />
     </>
   );
 }
 
-function HexTileWallpaper() {
+function ValveTilePage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoaded = () => {
@@ -63,10 +63,10 @@ function HexTileWallpaper() {
 
   return (
     <div 
-      className={isLoaded ? "tiles-container" : ""}
+      className={isLoaded ? "valves-container" : ""}
       style={{ width: '100%', height: '100%' }}
     >
-      <Canvas camera={{ position: [0, 0, 10], zoom: 4.5 }}>
+      <Canvas orthographic camera={{ position: [0, 0, 10], zoom: 320.5 }}>
         <Suspense fallback={<Loader onLoaded={handleLoaded} />}>
           <SceneContent onReady={handleLoaded} />
         </Suspense>
@@ -75,4 +75,4 @@ function HexTileWallpaper() {
   );
 }
 
-export default HexTileWallpaper;
+export default ValveTilePage;
