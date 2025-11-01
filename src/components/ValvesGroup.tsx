@@ -6,6 +6,7 @@ interface Props {
   verticalSpacing?: number;
   horizontalOffset?: number;
   position?: [number, number, number];
+  scale?: [number, number, number];
 }
 
 const ValvesGroup = ({ 
@@ -13,7 +14,8 @@ const ValvesGroup = ({
   tilesPerRow = 5, 
   verticalSpacing = 0.565,
   horizontalOffset = 0.325,
-  position = [0, 0, 0]
+  position = [0, 0, 0],
+  scale = [1, 1, 1]
 }: Props) => {
   
   const generateRows = () => {
@@ -31,7 +33,7 @@ const ValvesGroup = ({
           key={i} 
           position={[xPosition, yPosition, 0]} 
           count={tilesPerRow}
-          spacing={0.75}
+          spacing={0.72}
         />
       );
     }
@@ -39,7 +41,7 @@ const ValvesGroup = ({
   };
 
   return (
-    <group position={position}>
+    <group position={position} scale={scale}>
       {generateRows()}
     </group>
   );

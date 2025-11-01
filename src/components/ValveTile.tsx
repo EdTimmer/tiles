@@ -13,7 +13,7 @@ interface Props {
 
 const HexTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/valve.glb'); 
+  const { nodes, materials } = useGLTF('/assets/models/valve_3.glb'); 
   const currentRotationRef = useRef(0);
   const targetRotationRef = useRef(0);
   const holdTimeRef = useRef(0);
@@ -45,7 +45,7 @@ const HexTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Prop
       holdTimeRef.current += delta;
 
       // After 2 seconds, rotate back
-      if (holdTimeRef.current >= 20) {
+      if (holdTimeRef.current >= 10) {
         targetRotationRef.current = 0;
         isHoldingRef.current = false;
       }

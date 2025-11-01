@@ -48,7 +48,7 @@ function SceneContent({ onReady }: { onReady: () => void }) {
     <>
       <ambientLight intensity={2.5} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
-      <ValvesGroup rows={9} tilesPerRow={15} verticalSpacing={0.73} horizontalOffset={0.325} />
+      <ValvesGroup rows={9} tilesPerRow={16} verticalSpacing={0.725} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
       <Environment preset="city" />
     </>
   );
