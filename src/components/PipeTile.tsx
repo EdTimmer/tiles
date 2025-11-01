@@ -13,7 +13,7 @@ interface Props {
 
 const PipeTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/pipe_2.glb'); 
+  const { nodes, materials } = useGLTF('/assets/models/pipe_3.glb'); 
   
   // Local hover state for individual tile
   const [isHovered, setIsHovered] = useState(false);
