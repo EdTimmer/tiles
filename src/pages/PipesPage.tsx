@@ -55,7 +55,7 @@ function PipesPage() {
       className={isLoaded ? "pipes-container" : ""}
       style={{ width: '100%', height: '100%' }}
     >
-      <Canvas orthographic camera={{ position: [0, 0, 10], zoom: 320.5, far: 10 }}>
+      <Canvas camera={{ position: [0, 0, 10], zoom: 4.0, far: 10 }}>
         <Suspense fallback={<Loader />}>
           <SceneContent onReady={handleLoaded} />
         </Suspense>
