@@ -1,7 +1,7 @@
 import { Suspense, useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, Html } from '@react-three/drei';
-import ValvesGroup from '../components/ValvesGroup';
+import PipesGroup from '@/components/PipesGroup';
 
 function Loader() {
   return (
@@ -33,17 +33,17 @@ function SceneContent({ onReady }: { onReady: () => void }) {
   
   return (
     <>
-      {/* <ambientLight intensity={0.5} /> */}
+      {/* <ambientLight intensity={2.5} /> */}
       {/* <directionalLight position={[5, 5, 5]} intensity={1} /> */}
-      <ValvesGroup rows={9} tilesPerRow={16} verticalSpacing={0.725} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
+      <PipesGroup rows={9} tilesPerRow={17} verticalSpacing={0.725} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
       <Suspense fallback={null}>
-        <Environment preset="city" />
+        <Environment preset="apartment" environmentIntensity={0.5} />
       </Suspense>
     </>
   );
 }
 
-function ValveTilePage() {
+function PipesPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoaded = () => {
@@ -52,10 +52,10 @@ function ValveTilePage() {
 
   return (
     <div 
-      className={isLoaded ? "valves-container" : ""}
+      className={isLoaded ? "pipes-container" : ""}
       style={{ width: '100%', height: '100%' }}
     >
-      <Canvas orthographic camera={{ position: [0, 0, 10], zoom: 320.5 }}>
+      <Canvas orthographic camera={{ position: [0, 0, 10], zoom: 320.5, far: 10 }}>
         <Suspense fallback={<Loader />}>
           <SceneContent onReady={handleLoaded} />
         </Suspense>
@@ -64,4 +64,4 @@ function ValveTilePage() {
   );
 }
 
-export default ValveTilePage;
+export default PipesPage;

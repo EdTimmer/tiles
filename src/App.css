@@ -98,7 +98,16 @@ button:hover {
 .valves-container {
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/abstract-01.jpg');
+  background-image: url('/assets/images/foxes_3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.pipes-container {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/kyoto_02.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

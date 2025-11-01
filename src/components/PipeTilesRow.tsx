@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import ValveTile from './ValveTile';
+import PipeTile from './PipeTile';
 
 interface Props {
   position?: [number, number, number];
@@ -7,16 +6,7 @@ interface Props {
   spacing?: number;
 }
 
-const ValveTilesRow = ({ position = [0, 0, 0], count = 5, spacing = 0.65 }: Props) => {
-  const [isRowHovered, setIsRowHovered] = useState(false);
-  
-  const handleRowHover = () => {
-    setIsRowHovered(true);
-  };
-
-  const handleRowLeave = () => {
-    setIsRowHovered(false);
-  };
+const PipeTilesRow = ({ position = [0, 0, 0], count = 5, spacing = 0.65 }: Props) => {
   
   const generateTiles = () => {
     const tiles = [];
@@ -26,12 +16,10 @@ const ValveTilesRow = ({ position = [0, 0, 0], count = 5, spacing = 0.65 }: Prop
     for (let i = 0; i < count; i++) {
       const xPosition = position[0] + (i * spacing) - offset;
       tiles.push(
-        <ValveTile
+        <PipeTile
           key={i} 
           position={[xPosition, position[1], position[2]]} 
           scale={0.356}
-          isRowHovered={isRowHovered}
-          onRowHover={handleRowHover}
         />
       );
     }
@@ -39,10 +27,10 @@ const ValveTilesRow = ({ position = [0, 0, 0], count = 5, spacing = 0.65 }: Prop
   };
 
   return (
-    <group onPointerLeave={handleRowLeave}>
+    <group>
       {generateTiles()}
     </group>
   );
 };
 
-export default ValveTilesRow;
+export default PipeTilesRow;

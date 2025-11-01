@@ -13,9 +13,9 @@ interface Props {
   onRowHover?: () => void;
 }
 
-const ValveTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isRowHovered = false, onRowHover }: Props) => {
+const Slot = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isRowHovered = false, onRowHover }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/valve_8.glb'); 
+  const { nodes, materials } = useGLTF('/assets/models/slot.glb'); 
   const currentRotationRef = useRef(0);
   const targetRotationRef = useRef(0);
   const holdTimeRef = useRef(0);
@@ -115,4 +115,4 @@ const ValveTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isRo
 // Preload the GLTF model
 useGLTF.preload('/assets/models/valve_8.glb');
 
-export default ValveTile;
+export default Slot;

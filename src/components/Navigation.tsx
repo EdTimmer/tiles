@@ -16,7 +16,27 @@ const Navigation = () => {
       >
         Hex Tiles
       </Link>
+
+      <Link 
+        to="/valve-tiles" 
+        className="button" 
+        style={{ 
+          border: isActive('/valve-tiles') ? '1px solid white' : '1px solid transparent',
+        }}
+      >
+        Valve Tiles
+      </Link>
       
+      <Link 
+        to="/pipe-tiles" 
+        className="button" 
+        style={{ 
+          border: isActive('/pipe-tiles') ? '1px solid white' : '1px solid transparent',
+        }}
+      >
+        Pipe Tiles
+      </Link>
+
       <Link 
         to="/h-blocks" 
         className="button" 
@@ -25,26 +45,6 @@ const Navigation = () => {
         }}
       >
         H Blocks
-      </Link>
-      
-      <Link 
-        to="/wall-b" 
-        className="button" 
-        style={{ 
-          border: isActive('/wall-b') ? '1px solid white' : '1px solid transparent',
-        }}
-      >
-        Wall B
-      </Link>
-      
-      <Link 
-        to="/wall-c" 
-        className="button" 
-        style={{ 
-          border: isActive('/wall-c') ? '1px solid white' : '1px solid transparent',
-        }}
-      >
-        Wall C
       </Link>
     </div>
   );
