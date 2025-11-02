@@ -14,7 +14,7 @@ const Navigation = () => {
           border: isActive('/hex-tiles') ? '1px solid white' : '1px solid transparent',
         }}
       >
-        Hex Tiles
+        Hexagons
       </Link>
 
       <Link 
@@ -24,7 +24,7 @@ const Navigation = () => {
           border: isActive('/pipe-tiles') ? '1px solid white' : '1px solid transparent',
         }}
       >
-        Pipe Tiles
+        Pipes
       </Link>
 
       <Link 
@@ -34,7 +34,7 @@ const Navigation = () => {
           border: isActive('/valve-tiles') ? '1px solid white' : '1px solid transparent',
         }}
       >
-        Valve Tiles
+        Valves
       </Link>
       
       <Link 
@@ -44,7 +44,7 @@ const Navigation = () => {
           border: isActive('/h-blocks') ? '1px solid white' : '1px solid transparent',
         }}
       >
-        H Blocks
+        Kamon
       </Link>
     </div>
   );

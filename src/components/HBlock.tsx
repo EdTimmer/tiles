@@ -23,59 +23,63 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isVerti
   const isFlippingRef = useRef(false);
 
   const handlePointerEnter = (event: any) => {
+    // Prevent event from bubbling and only trigger on the frontmost mesh
     event.stopPropagation();
     
-    // Prevent interaction during flip animation
+    // Prevent hover during flip/spin animation
     if (isFlippingRef.current) return;
     
-    // Start animation: move -2.0 on z-axis
+    // Start move animation - move -2.0 on z-axis
     targetZPositionRef.current = -2.0;
     holdTimeRef.current = 0;
     isHoldingRef.current = false;
     isFlippingRef.current = false;
+    
+    // Don't reset rotation - let it accumulate from previous flips
   };
 
   
 
-  // Animation loop for z-position and y-rotation
+  // Continuous z-axis movement and y-axis rotation using useFrame
   useFrame((_, delta) => {
     if (!groupRef.current) return;
     
     const isAtTarget = Math.abs(currentZPositionRef.current - (-2.0)) < 0.01;
     
-    // Start flip when target position reached
+    // If we've reached target position, start holding timer and flip animation
     if (isAtTarget && !isHoldingRef.current) {
       isHoldingRef.current = true;
       holdTimeRef.current = 0;
       isFlippingRef.current = true;
-      targetYRotationRef.current += Math.PI;
+      targetYRotationRef.current += Math.PI; // Add 180 degrees to current rotation
     }
     
-    // Increment hold timer
+    // If holding, increment timer
     if (isHoldingRef.current) {
       holdTimeRef.current += delta;
 
-      // Return to original position after 0.8s
+      // After 0.8 seconds, move back but keep rotation
       if (holdTimeRef.current >= 0.8) {
         targetZPositionRef.current = 0;
         isHoldingRef.current = false;
         isFlippingRef.current = false;
+        // Note: targetYRotationRef.current stays at Math.PI (180°)
       }
     }
     
-    // Frame-independent interpolation
-    const speed = 3;
+    // Incorporate delta into the interpolation factor for frame rate independence
+    const speed = 3; // Adjust this to control the smoothness/speed
     const lerpFactor = 1 - Math.exp(-speed * delta);
     
-    // Interpolate z-position
+    // Interpolate the current z position towards the target z position
     currentZPositionRef.current = MathUtils.lerp(
       currentZPositionRef.current,
       targetZPositionRef.current,
       lerpFactor
     );
     
-    // Interpolate y-rotation
-    const rotationSpeed = 3;
+    // Interpolate the current y rotation towards the target y rotation
+    const rotationSpeed = 3; // Faster rotation for the flip effect
     const rotationLerpFactor = 1 - Math.exp(-rotationSpeed * delta);
     currentYRotationRef.current = MathUtils.lerp(
       currentYRotationRef.current,
@@ -83,23 +87,27 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isVerti
       rotationLerpFactor
     );
     
-    // Apply rotation using quaternions
+    // Apply precise rotation using quaternions
     const initialRotationQuaternion = new THREE.Quaternion().setFromEuler(
       new THREE.Euler(rotation[0], rotation[1], rotation[2])
     );
     
+    // Create rotation quaternion for the Y-axis flip
     const yRotationQuaternion = new THREE.Quaternion().setFromAxisAngle(
       new THREE.Vector3(0, 1, 0),
       currentYRotationRef.current
     );
     
+    // Combine rotations: apply Y rotation after initial rotation
     const finalQuaternion = new THREE.Quaternion()
       .multiplyQuaternions(initialRotationQuaternion, yRotationQuaternion);
     
     groupRef.current.quaternion.copy(finalQuaternion);
+    
+    // Apply transformations
     groupRef.current.position.z = position[2] + currentZPositionRef.current;
     
-    // Snap to target when close enough
+    // Snap to target if very close
     if (Math.abs(currentZPositionRef.current - targetZPositionRef.current) < 0.001) {
       currentZPositionRef.current = targetZPositionRef.current;
       groupRef.current.position.z = position[2] + targetZPositionRef.current;
@@ -137,7 +145,7 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isVerti
   )
 }
 
-useGLTF.preload('/assets/models/h-block-gold-v1-4.glb');
-useGLTF.preload('/assets/models/h-block-gold-v2-4.glb');
+// Preload the GLTF model
+useGLTF.preload('/assets/models/hex_tile_4.glb');
 
 export default HBlock;

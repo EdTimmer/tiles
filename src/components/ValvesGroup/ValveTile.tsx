@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import { MathUtils } from 'three';
 
 interface Props {
-  children?: React.ReactNode;
   scale?: number;
   position?: [number, number, number];
   rotation?: [number, number, number];
