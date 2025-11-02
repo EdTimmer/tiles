@@ -19,6 +19,10 @@ function App() {
           <Route path="/pipe-tiles" element={<PipesPage />} />
           <Route path="/h-blocks" element={<HBlockPage />} />
         </Routes>
+
+        <div className="link-container">
+          <a href="https://www.edtimmer.com/" target="_blank" aria-label="Link to portfolio" title="Link to portfolio">edtimmer.com</a>
+        </div>
       </div>
     </Router>
   )

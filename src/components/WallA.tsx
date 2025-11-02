@@ -1,7 +1,6 @@
 import { useRef, useEffect, useMemo, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Mesh, ShaderMaterial, Vector2, Raycaster } from 'three'
-import { useControls, button } from 'leva'
 import vertexShader from '@shaders/cellsA/vertex_cells_a.glsl'
 import fragmentShader from '@shaders/cellsA/fragment_cells_a.glsl'
 
@@ -18,29 +17,15 @@ export default function WallA() {
   const [isDragging, setIsDragging] = useState(false)
   const { camera, gl } = useThree()
 
-  const DEFAULTS = {
-    'Res X': 1920,
-    'Res Y': 3000,
-    'Anim Speed': 0.3,
-    'Fade Speed': 0.5,
-    'Click': '#ff00fd',
-    'Click Intensity': 0.7,
-    'Base': '#33cc80',
-    'Base Intensity': 0.3
-  }
-
-  const [{ 'Res X': resolutionX, 'Res Y': resolutionY, 'Anim Speed': animationSpeed, 'Fade Speed': fadeSpeed, Base: baseColor, 'Base Intensity': colorIntensity, Click: clickColor, 'Click Intensity': clickColorIntensity }, set] = useControls('CellsA', () => ({
-    'Res X': { value: DEFAULTS['Res X'], min: 100, max: 4000, step: 10 },
-    'Res Y': { value: DEFAULTS['Res Y'], min: 100, max: 4000, step: 10 },
-    'Anim Speed': { value: DEFAULTS['Anim Speed'], min: 0, max: 5, step: 0.1 },
-    'Base': { value: DEFAULTS['Base'] },    
-    'Base Intensity': { value: DEFAULTS['Base Intensity'], min: 0, max: 1, step: 0.01 },
-    'Click': { value: DEFAULTS['Click'] },
-    'Click Intensity': { value: DEFAULTS['Click Intensity'], min: 0, max: 1, step: 0.01 },
-    'Fade Speed': { value: DEFAULTS['Fade Speed'], min: 0.1, max: 3, step: 0.1 },
-    
-    'Reset All': button(() => set(DEFAULTS))
-  }))
+  // Hardcoded values (previously controlled by Leva)
+  const resolutionX = 1920
+  const resolutionY = 3000
+  const animationSpeed = 0.3
+  const fadeSpeed = 0.5
+  const baseColor = '#33cc80'
+  const colorIntensity = 0.3
+  const clickColor = '#ff00fd'
+  const clickColorIntensity = 0.7
 
   const uniforms = useMemo(
     () => ({

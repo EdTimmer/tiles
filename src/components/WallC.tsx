@@ -1,7 +1,6 @@
 import { useRef, useEffect, useMemo, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Mesh, ShaderMaterial, Vector2, Raycaster } from 'three'
-import { useControls, button } from 'leva'
 import vertexShader from '@shaders/noiseA/vertex_a.glsl'
 import fragmentShader from '@shaders/noiseA/fragment_a.glsl'
 
@@ -19,28 +18,15 @@ export default function WallC() {
   const [currentDragPoint, setCurrentDragPoint] = useState<ClickPoint | null>(null)
   const { camera, gl } = useThree()
 
-  const DEFAULTS = {
-    uNoise: 0.1,
-    uSpeed: 0.04,
-    uOscillationFrequency: 82.0,
-    uIntensity: 0.1,
-    uSecondColor: '#9a638e', // Hex color
-    fadeSpeed: 0.5,
-    distortionRadius: 0.1,
-    distortionStrength: 0.3
-  }
-
-  const [{ uNoise, uSpeed, uOscillationFrequency, uIntensity, uSecondColor, fadeSpeed, distortionRadius, distortionStrength }, set] = useControls(() => ({
-    uNoise: { value: DEFAULTS.uNoise, min: 0, max: 50, step: 0.1 },
-    uSpeed: { value: DEFAULTS.uSpeed, min: 0, max: 1, step: 0.01 },
-    uOscillationFrequency: { value: DEFAULTS.uOscillationFrequency, min: 0, max: 100, step: 1 },
-    uIntensity: { value: DEFAULTS.uIntensity, min: 0, max: 1, step: 0.01 },
-    uSecondColor: { value: DEFAULTS.uSecondColor },
-    fadeSpeed: { value: DEFAULTS.fadeSpeed, min: 0.1, max: 3, step: 0.1 },
-    distortionRadius: { value: DEFAULTS.distortionRadius, min: 0.01, max: 0.5, step: 0.01 },
-    distortionStrength: { value: DEFAULTS.distortionStrength, min: 0, max: 0.5, step: 0.001 },
-    'Reset All': button(() => set(DEFAULTS))
-  }))
+  // Hardcoded values (previously controlled by Leva)
+  const uNoise = 0.1
+  const uSpeed = 0.04
+  const uOscillationFrequency = 82.0
+  const uIntensity = 0.1
+  const uSecondColor = '#9a638e'
+  const fadeSpeed = 0.5
+  const distortionRadius = 0.1
+  const distortionStrength = 0.3
 
   const uniforms = useMemo(
     () => ({

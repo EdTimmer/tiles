@@ -1,93 +1,170 @@
-import { Suspense, useState, useRef } from 'react';
+import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, Html, OrbitControls } from '@react-three/drei';
-// import TilesGroup from '../components/TilesGroup';
-import HBlocksGroup from '@/components/HBlocksGroup';
+import { Environment, Loader, useProgress } from '@react-three/drei';
+import HBlocksGroup from '@/components/HBlockGroup';
 
-function Loader() {
-  return (
-    <Html center>
-      <div style={{ 
-        color: 'white', 
-        fontSize: '24px',
-        background: 'rgba(0,0,0,0.8)',
-        padding: '20px 40px',
-        borderRadius: '8px'
-      }}>
-        Loading...
-      </div>
-    </Html>
-  );
-}
-
-function SceneContent({ onReady }: { onReady: () => void }) {
-  const readyCalled = useRef(false);
-  const spotLightStrength = 1.0;
-  
-  // Call onReady immediately when component mounts
-  if (!readyCalled.current) {
-    readyCalled.current = true;
-    // Use queueMicrotask to defer until after render
-    queueMicrotask(() => {
-      onReady();
-    });
-  }
+function SceneContent() {
+  const directionalLightIntensity = 0.02;
   
   return (
     <>
-      <ambientLight intensity={7.5} />
-      {/* <pointLight position={[-0.2, -0.2, 5]} intensity={1.0} /> */}
-      {/* <directionalLight position={[0.2, 0.2, 5]} intensity={0.2} /> */}
-      {/* <rectAreaLight position={[-0.5, 0, 10]} width={20} height={10} intensity={5.0}
-      <spotLight position={[-2.2, -0.7, 10]} angle={0.3} intensity={2.0} penumbra={0} /> color={'white'} /> */}
+      <ambientLight intensity={7} />
 
-      <spotLight position={[-2.3, 0.7, 10]} angle={0.3} intensity={spotLightStrength} penumbra={0} />
-      <spotLight position={[0, 0.7, 10]} angle={0.3} intensity={spotLightStrength} penumbra={0} />
-      <spotLight position={[2.3, 0.7, 10]} angle={0.3} intensity={spotLightStrength} penumbra={0} />
+      {/* far left column linghts */}
+      <directionalLight 
+        position={[-0.68, -0.06, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
 
-      <spotLight position={[-2.3, -0.8, 10]} angle={0.3} intensity={spotLightStrength} penumbra={0} />
-      <spotLight position={[0, -0.8, 10]} angle={0.3} intensity={spotLightStrength} penumbra={0} />
-      <spotLight position={[2.3, -0.8, 10]} angle={0.3} intensity={spotLightStrength} penumbra={0} />
+      <directionalLight 
+        position={[-0.68, 0.14, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
 
-      {/* <directionalLight position={[0, 1, 1]} intensity={1.0} color={'yellow'} />
-      <directionalLight position={[0, -1, 3]} intensity={1.0} color={'yellow'} />
+      <directionalLight 
+        position={[-0.68, -0.24, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
 
-      <directionalLight position={[0, 1, -3]} intensity={1.0} color={'yellow'} />
-      <directionalLight position={[0, -1, -3]} intensity={1.0} color={'yellow'} />
+      {/* left column linghts */}
+      <directionalLight 
+        position={[-0.3, -0.06, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
 
-      <directionalLight position={[-2, 0, 3]} intensity={1.0} color={'yellow'} />
-      <directionalLight position={[2, 0, 3]} intensity={1.0} color={'yellow'} />
+      <directionalLight 
+        position={[-0.3, 0.14, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
 
-      <directionalLight position={[-2, 0, -3]} intensity={1.0} color={'yellow'} />
-      <directionalLight position={[2, 0, -3]} intensity={1.0} color={'yellow'} /> */}
+      <directionalLight 
+        position={[-0.3, -0.24, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      {/* center column linghts */}
+      <directionalLight 
+        position={[0.08, -0.06, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      <directionalLight 
+        position={[0.08, 0.14, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      <directionalLight 
+        position={[0.08, -0.24, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      {/* right column linghts */}
+      <directionalLight 
+        position={[0.46, -0.06, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      <directionalLight 
+        position={[0.46, 0.14, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      <directionalLight 
+        position={[0.46, -0.24, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      {/* far right column linghts */}
+      <directionalLight 
+        position={[0.84, -0.06, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      <directionalLight 
+        position={[0.84, 0.14, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
+
+      <directionalLight 
+        position={[0.84, -0.24, 5]}
+        intensity={directionalLightIntensity}
+        color={'#FFFFFF'}
+        castShadow={true}
+      />
 
       <HBlocksGroup rows={5} tilesPerRow={13} verticalSpacing={0.375} horizontalOffset={0.38} />
-      <Suspense fallback={null}>
-        <Environment preset="sunset" environmentIntensity={1.0} />
-      </Suspense>
-      <OrbitControls enableZoom={true} enablePan={true} />
+      <Environment preset="sunset" environmentIntensity={1.0} />
+      {/* <OrbitControls enableZoom={true} enablePan={true} /> */}
     </>
   );
+}
+
+function ProgressTracker({ onLoaded }: { onLoaded: () => void }) {
+  const { progress } = useProgress();
+  
+  if (progress === 100) {
+    onLoaded();
+  }
+  
+  return null;
 }
 
 function HBlockPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoaded = () => {
-    setIsLoaded(true);
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
   };
 
   return (
-    <div 
-      className={isLoaded ? "hblocks-container" : ""}
-      style={{ width: '100%', height: '100%' }}
-    >
-      <Canvas camera={{ position: [0, 0, 10], zoom: 12 }}>
-        <Suspense fallback={<Loader />}>
-          <SceneContent onReady={handleLoaded} />
-        </Suspense>
-      </Canvas>
-    </div>
+    <>
+      <div 
+        className={isLoaded ? "hblocks-container" : ""}
+        style={{ 
+          width: '100%', 
+          height: '100%',
+          backgroundColor: 'black'
+        }}
+      >
+        <Canvas camera={{ position: [0, 0, 10], zoom: 12 }}>
+          <Suspense fallback={null}>
+            <SceneContent />
+            <ProgressTracker onLoaded={handleLoaded} />
+          </Suspense>
+        </Canvas>
+      </div>
+      <Loader />
+    </>
   );
 }
 
