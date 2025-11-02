@@ -13,7 +13,7 @@ interface Props {
 
 const PipeTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/pipe_3.glb'); 
+  const { nodes, materials } = useGLTF('/assets/models/pipe_4.glb'); 
   
   // Local hover state for individual tile
   const [isHovered, setIsHovered] = useState(false);
@@ -26,7 +26,7 @@ const PipeTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Pro
   // Update target x rotation based on individual hover state
   if (isHovered && !prevHoveredXRef.current) {
     // Start flip animation when tile is hovered
-    targetXRotationRef.current = -Math.PI; // -180 degrees
+    targetXRotationRef.current = -Math.PI + 0.5; // -180 degrees
     holdXTimeRef.current = 0;
     isHoldingXRef.current = false;
     prevHoveredXRef.current = true;
@@ -37,7 +37,7 @@ const PipeTile = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Pro
     if (!groupRef.current) return;
 
     // Handle X-axis rotation (individual tile hover)
-    const isAtXFlipped = Math.abs(currentXRotationRef.current - (-Math.PI)) < 0.01;
+    const isAtXFlipped = Math.abs(currentXRotationRef.current - (-Math.PI + 0.5)) < 0.01;
 
     // If we've reached flipped position on x-axis, start holding timer
     if (isAtXFlipped && !isHoldingXRef.current) {

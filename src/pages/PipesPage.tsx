@@ -35,7 +35,7 @@ function SceneContent({ onReady }: { onReady: () => void }) {
     <>
       {/* <ambientLight intensity={2.5} /> */}
       {/* <directionalLight position={[5, 5, 5]} intensity={1} /> */}
-      <PipesGroup rows={9} tilesPerRow={17} verticalSpacing={0.725} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
+      <PipesGroup rows={9} tilesPerRow={17} verticalSpacing={0.8} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
       <Suspense fallback={null}>
         <Environment preset="apartment" environmentIntensity={0.5} />
       </Suspense>
@@ -55,7 +55,7 @@ function PipesPage() {
       className={isLoaded ? "pipes-container" : ""}
       style={{ width: '100%', height: '100%' }}
     >
-      <Canvas camera={{ position: [0, 0, 10], zoom: 4.0, far: 9.9 }}>
+      <Canvas camera={{ position: [0, 0, 10], zoom: 4.0, far: 10.0 }}>
         <Suspense fallback={<Loader />}>
           <SceneContent onReady={handleLoaded} />
         </Suspense>

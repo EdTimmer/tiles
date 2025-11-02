@@ -9,11 +9,12 @@ interface Props {
   scale?: number;
   position?: [number, number, number];
   rotation?: [number, number, number];
+  isVertical?: boolean;
 }
 
-const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props) => {
+const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], isVertical = true }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/h-block_8.glb'); 
+  const { nodes, materials } = useGLTF(isVertical ? '/assets/models/h-block-gold-kiri-kamon.glb' : '/assets/models/h-block-gold-mokko.glb'); 
   const currentZPositionRef = useRef(0);
   const targetZPositionRef = useRef(0);
   const holdTimeRef = useRef(0);
@@ -55,8 +56,8 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props
     if (isHoldingRef.current) {
       holdTimeRef.current += delta;
 
-      // After 0.5 seconds, move back but keep rotation
-      if (holdTimeRef.current >= 0.5) {
+      // After 0.8 seconds, move back but keep rotation
+      if (holdTimeRef.current >= 0.8) {
         targetZPositionRef.current = 0;
         isHoldingRef.current = false;
         isFlippingRef.current = false;
@@ -76,7 +77,7 @@ const HBlock = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0] }: Props
     );
     
     // Interpolate the current y rotation towards the target y rotation
-    const rotationSpeed = 6; // Faster rotation for the flip effect
+    const rotationSpeed = 3; // Faster rotation for the flip effect
     const rotationLerpFactor = 1 - Math.exp(-rotationSpeed * delta);
     currentYRotationRef.current = MathUtils.lerp(
       currentYRotationRef.current,

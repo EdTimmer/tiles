@@ -1,3 +1,4 @@
+import PipeAndSlot from './PipeAndSlot';
 import PipeTile from './PipeTile';
 
 interface Props {
@@ -16,7 +17,7 @@ const PipeTilesRow = ({ position = [0, 0, 0], count = 5, spacing = 0.65 }: Props
     for (let i = 0; i < count; i++) {
       const xPosition = position[0] + (i * spacing) - offset;
       tiles.push(
-        <PipeTile
+        <PipeAndSlot
           key={i} 
           position={[xPosition, position[1], position[2]]} 
           scale={0.356}

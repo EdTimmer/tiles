@@ -23,7 +23,8 @@ const HBlocksRow = ({ position = [0, 0, 0], count = 5, spacing = 0.38 }: Props) 
           key={i} 
           position={[xPosition, position[1], position[2]]} 
           rotation={rotation}
-          scale={0.356} 
+          scale={0.356}
+          isVertical={i % 2 === 0}
         />
       );
     }
