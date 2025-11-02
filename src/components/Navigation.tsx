@@ -18,16 +18,6 @@ const Navigation = () => {
       </Link>
 
       <Link 
-        to="/valve-tiles" 
-        className="button" 
-        style={{ 
-          border: isActive('/valve-tiles') ? '1px solid white' : '1px solid transparent',
-        }}
-      >
-        Valve Tiles
-      </Link>
-      
-      <Link 
         to="/pipe-tiles" 
         className="button" 
         style={{ 
@@ -37,6 +27,16 @@ const Navigation = () => {
         Pipe Tiles
       </Link>
 
+      <Link 
+        to="/valve-tiles" 
+        className="button" 
+        style={{ 
+          border: isActive('/valve-tiles') ? '1px solid white' : '1px solid transparent',
+        }}
+      >
+        Valve Tiles
+      </Link>
+      
       <Link 
         to="/h-blocks" 
         className="button" 

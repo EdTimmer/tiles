@@ -15,7 +15,7 @@ interface Props {
 
 const Slot = ({ scale = 4, position = [0, 0, 0], rotation = [0, 0, 0], onRowHover }: Props) => {
   const groupRef = useRef<THREE.Group>(null);
-  const { nodes, materials } = useGLTF('/assets/models/slot-03.glb'); 
+  const { nodes, materials } = useGLTF('/assets/models/slot-04.glb'); 
   // const currentRotationRef = useRef(0);
   // const targetRotationRef = useRef(0);
   // const holdTimeRef = useRef(0);
