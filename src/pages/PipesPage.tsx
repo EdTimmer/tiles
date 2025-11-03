@@ -6,7 +6,7 @@ import PipesGroup from '@/components/PipesGroup';
 function SceneContent() {
   return (
     <>
-      <PipesGroup rows={9} tilesPerRow={17} verticalSpacing={0.8} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
+      <PipesGroup rows={9} tilesPerRow={17} verticalSpacing={0.8} horizontalOffset={0.364} scale={[1.0, 1.0, 1.0]} />
       <Environment preset="apartment" environmentIntensity={0.5} />
     </>
   );

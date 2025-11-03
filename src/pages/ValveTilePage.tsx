@@ -6,7 +6,7 @@ import ValvesGroup from '@/components/ValvesGroup';
 function SceneContent() {
   return (
     <>
-      <ValvesGroup rows={9} tilesPerRow={16} verticalSpacing={0.725} horizontalOffset={0.325} scale={[1.0, 1.0, 1.0]} />
+      <ValvesGroup rows={9} tilesPerRow={16} verticalSpacing={0.725} horizontalOffset={0.364} scale={[1.0, 1.0, 1.0]} />
       <Environment preset="city" />
     </>
   );
