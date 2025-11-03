@@ -13,11 +13,13 @@ function App() {
         <Navigation />
         
         <Routes>
-          <Route path="/" element={<Navigate to="/hex-tiles" replace />} />
-          <Route path="/hex-tiles" element={<HexTilePage />} />          
-          <Route path="/valve-tiles" element={<ValveTilePage />} />
-          <Route path="/pipe-tiles" element={<PipesPage />} />
-          <Route path="/h-blocks" element={<HBlockPage />} />
+          <Route path="/" element={<Navigate to="/hexagons" replace />} />
+          <Route path="/hexagons" element={<HexTilePage />} />          
+          <Route path="/valves" element={<ValveTilePage />} />
+          <Route path="/pipes" element={<PipesPage />} />
+          <Route path="/kamon" element={<HBlockPage />} />
+          {/* Catch-all route for invalid paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
         <div className="link-container">

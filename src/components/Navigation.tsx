@@ -8,7 +8,7 @@ const Navigation = () => {
   return (
     <div className="buttons-container">
       <Link 
-        to="/hex-tiles" 
+        to="/hexagons" 
         className="button" 
         style={{ 
           border: isActive('/hex-tiles') ? '1px solid white' : '1px solid transparent',
@@ -18,7 +18,7 @@ const Navigation = () => {
       </Link>
 
       <Link 
-        to="/pipe-tiles" 
+        to="/pipes" 
         className="button" 
         style={{ 
           border: isActive('/pipe-tiles') ? '1px solid white' : '1px solid transparent',
@@ -28,7 +28,7 @@ const Navigation = () => {
       </Link>
 
       <Link 
-        to="/valve-tiles" 
+        to="/valves" 
         className="button" 
         style={{ 
           border: isActive('/valve-tiles') ? '1px solid white' : '1px solid transparent',
@@ -38,7 +38,7 @@ const Navigation = () => {
       </Link>
       
       <Link 
-        to="/h-blocks" 
+        to="/kamon" 
         className="button" 
         style={{ 
           border: isActive('/h-blocks') ? '1px solid white' : '1px solid transparent',
